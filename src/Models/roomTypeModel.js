@@ -5,7 +5,7 @@ const roomSchema = new Schema(
     name: {
       type: String,
       required: true,
-      enum: ['extra large', 'large', 'small', 'medium'],
+      enum: ['extra large', 'large', 'small', 'medium', 'economic'],
     },
   },
   { timestamps: true }

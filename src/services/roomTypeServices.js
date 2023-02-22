@@ -8,8 +8,13 @@ class roomTypeService{
     }
 
     // get all room types
-    async getRoomTypes(id){
-        return await roomTypeModel.findById(id)
+    async getRoomTypes(filter){
+        return await roomTypeModel.find(filter)
+    }
+
+    // delete room type
+    async deleteRoomType(id){
+        return await roomTypeModel.findByIdAndDelete(id)
     }
 }
 
