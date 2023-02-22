@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
-const { DATABASE } = require("./constants")
+const {config} = require('dotenv');
+config();
 
 const connectDB = async() => {
     try {
         mongoose.set('strictQuery', true);
-        mongoose.connect(DATABASE.MONGO_URI, ()=> {
-            console.log('connected to DB!')
+        mongoose.connect(process.env.MONGO_URI, ()=> {
+            console.log('Database connected!')
         })
     }
     catch (error) {

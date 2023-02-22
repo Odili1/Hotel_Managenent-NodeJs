@@ -5,7 +5,7 @@ const roomSchema = new Schema(
     name: {
       type: String,
       required: true,
-      enum: ['large', 'small', 'medium'],
+      enum: ['extra large', 'large', 'small', 'medium'],
     },
   },
   { timestamps: true }
@@ -13,4 +13,4 @@ const roomSchema = new Schema(
 
 // roomSchema.index({ "$**": "text" }, { default_language: "english" });
 
-module.exports = model('room-type', roomSchema);
+module.exports = model('roomType', roomSchema);

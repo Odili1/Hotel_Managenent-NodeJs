@@ -4,22 +4,22 @@ const RoomService = require('../services/roomServices');
 // Create Rooms
 exports.addRoom = async(req, res) => {
   try {
-    const RoomId = req.params.id
-    // const newRoom = req.body;
+    // const RoomId = req.params.id
+    const newRoom = req.body;
 
     // check if room already exists
-    const existingRoom = await RoomService.getRoom({_id: RoomId})
+    const existingRoom = await RoomService.getRoom({name: newRoom.name})
 
     if (existingRoom) res.status(403).json({
       success: false,
       message: 'Room already exists'
     })
 
-    const newRoom = await RoomService.addRoom(req.body);
+    const addedRoom = await RoomService.addRoom(newRoom);
     return res.status(200).json({
       success: true,
-      message: 'Room successfully',
-      room: newRoom
+      message: 'Room added successfully',
+      room: addedRoom
     })
   } catch (error) {
     return res.status(500).json({
@@ -119,8 +119,10 @@ exports.getRooms = async(req, res) => {
   try {
     const conditions = {};
 
-    if (req.body.name) conditions.name = req.body.name;
-    if (req.body.price) conditions.price = req.body.price;
+    if (req.params.search) conditions.name = req.params.search;
+    if (req.params.roomType) conditions.roomType = req.params.roomType;
+    if (req.params.min-price) conditions.minPrice = {$gte: req.params.min-price};
+    if (req.params.maxPrice) conditions.maxPrice = req.params.maxPrice;
 
     // fetch rooms
     const rooms = await RoomService.getRooms(conditions)
