@@ -20,9 +20,9 @@ exports.addRoomType = async(req, res) => {
 exports.getRoomTypes = async(req, res) => {
     try {
         const conditions = {};
-        if (req.params.name) conditions.name = req.params.name;
+        if (req.query.name) conditions.name = req.query.name;
 
-        const roomTypes = await RoomTypeService.getRoomTypes({conditions});
+        const roomTypes = await RoomTypeService.getRoomTypes(conditions);
 
         if (!roomTypes) res.status(404).json({
             success: false,
